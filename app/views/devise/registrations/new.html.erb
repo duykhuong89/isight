@@ -14,6 +14,27 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :'Day Of Birth' %>
+      <%= f.text_field :dob, class: 'form-control date-time-class' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phoneno %>
+      <%= f.text_field :phoneno, class: 'form-control' %>
+    </div>
      <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>
 </div>
+
+<script>
+  $(function () {
+    $('#user_dob').datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  });
+</script>

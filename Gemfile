@@ -15,6 +15,11 @@ gem 'devise_invitable'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'high_voltage'
 gem 'mysql2'
+# Khuong Added - 20150519
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-ui-rails'
+gem 'ajax-datatables-rails'
+gem "kaminari"
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
