@@ -1,41 +1,45 @@
-class UserDatatable < AjaxDatatablesRails::Base
-  
-  include AjaxDatatablesRails::Extensions::Kaminari
+class UserDatatable #< AjaxDatatablesRails::Base
+  delegate :params, :link_to, to: :@view
 
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['name' ,'email']
+  def initialize(view)
+    @view = view
   end
 
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['users.name' ,'users.email']
+  def as_json(options = {})
+    {
+      sEcho: params[:sEcho].to_i,
+      iTotalRecords: User.count,
+      iTotalDisplayRecords: users.total_entries,
+      aaData: data
+    }
   end
 
-  private
+private
 
   def data
-    records.map do |record|
+    users.map do |user|
       [
-        # comma separated list of the values for each cell of a table row
-        # example: record.attribute,
-        record.name,
-        record.email,
-        record.phoneno,
-        record.dob,
-        record.created_at
+        user.name,
+        user.email,
+        user.phoneno,
+        user.dob,
+        user.created_at,
+        link_to("delete", user, method: :delete, data: { confirm: 'Are you sure?' }) 
       ]
     end
   end
 
-  def get_raw_records
-    # insert query here
-    User.all
+  def users
+    @users ||= fetch_users
   end
-  
-  def sort_column
-    columns = %w[name email created_at]
-    columns[params[:iSortCol_0].to_i]
+
+  def fetch_users
+    users = User.order("#{sort_column} #{sort_direction}")
+    users = users.page(page).per_page(per_page)
+    if params[:sSearch].present?
+      users = users.where("name like :search or email like :search", search: "%#{params[:sSearch]}%")
+    end
+    users
   end
 
   def page
@@ -46,5 +50,12 @@ class UserDatatable < AjaxDatatablesRails::Base
     params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
   end
 
-  # ==== Insert 'presenter'-like methods below if necessary
+  def sort_column
+    columns = %w[name email created_at]
+    columns[params[:iSortCol_0].to_i]
+  end
+
+  def sort_direction
+    params[:sSortDir_0] == "desc" ? "desc" : "asc"
+  end
 end

@@ -14,5 +14,13 @@ class UsersController < ApplicationController
       redirect_to :back, :alert => "Access denied."
     end
   end
+  
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+        redirect_to root_url, notice: "User deleted."
+    end
+  end
 
 end

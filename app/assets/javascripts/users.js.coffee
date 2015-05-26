@@ -3,4 +3,4 @@ $ ->
     processing: true
     serverSide: true
     ajaxSource: $('#users-table').data('source')
-    pagingType: 'full_numbers'
+    sPaginationType: "full_numbers"
