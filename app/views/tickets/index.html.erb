@@ -1,0 +1,60 @@
+<div class="container">
+  <h2>Ticket List</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+      <tr data-row-id=<%= ticket.id %>>
+        <td><%= ticket.title %></td>
+        <td><%= ticket.descr %></td>
+        <td>
+          <% ticket.categories.each do |category| %>
+          <%= category.descr %> <%= ", " unless category == ticket.categories.last %>
+          <% end %>
+          <%#= ticket.categories.map{|p| p.descr}.join(", ") %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <button id="create-ticket" class="btn btn-primary">Create new ticket</button>
+</div>
+
+<div id="dialog-form" title="Create new ticket"></div>
+
+<script>
+  $(document).ready(function(){
+    //Dialog defining and processing
+    dialog = $('#dialog-form').dialog();
+    var loadCreateTicket=true;
+    dialog.dialog('close');
+    $('#create-ticket').click(function(){
+      if (loadCreateTicket){
+        $("#dialog-form").append("<%= escape_javascript(render(:partial => 'form', :object => @ticket)) %>");
+        loadCreateTicket=false;
+      }
+      dialog.dialog('open');
+    });
+    
+    //Row click event for table
+    $('.table').find('tr').click( function(){
+      var ticketID = $(this).data('row-id');
+      //alert('You clicked row ' +' - Val:' + customerId );
+      $.ajax({
+        type:'GET',
+        url:'/tickets/'+ticketID+'/edit',
+        success:function(data){
+          $('#dialog-form').html(data);
+          dialog.dialog('open');
+        }
+      });
+      //$('#dialog-form').append("<%= escape_javascript(render(:partial => 'form', :object => @ticket)) %>")
+    });
+  });
+</script>

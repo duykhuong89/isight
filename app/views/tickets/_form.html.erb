@@ -1,0 +1,12 @@
+<div class="authform">
+  <%# form_tag :action => 'new'  do %>
+  <%= form_for @ticket do |f| %>
+    <%= f.text_field :title, class: 'form-control', :placeholder => "Ticket's Title" %>
+    <%= f.text_area :descr, class: 'form-control', :placeholder => "Ticket's Description" %>
+    <label>Category (Multiple)</label>
+    <%= select_tag("category_ids[]", options_for_select(Category.all.collect { |category| [category.descr, category.id] }, @ticket.categories.collect { |category| category.id }), {:multiple => true, :size => 5, :class => 'form-control'}) %>
+    <p>
+        <%= submit_tag "Submit", class: 'form-control' %>
+    </p>
+  <% end %>
+</div>
