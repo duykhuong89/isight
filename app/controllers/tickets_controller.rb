@@ -12,6 +12,7 @@ class TicketsController < ApplicationController
   
   def create
     @ticket = Ticket.new(params[:ticket].to_hash)
+    @ticket.user_id = current_user.id
       if @ticket.save
       #  params[:category_ids].each do |k,v|
       #    @ticket.categories << Category.find(k)
@@ -33,6 +34,7 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(params[:ticket].to_hash)
+      @ticket.categories.destroy_all
       update_category_param
       flash[:notice] = 'Ticket was successfully updated.'
       redirect_to :action => 'index'

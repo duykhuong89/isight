@@ -23,6 +23,7 @@ gem 'ajax-datatables-rails'
 gem "kaminari"
 gem 'will_paginate', '~> 3.0'
 gem 'byebug'
+gem 'spinjs-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
