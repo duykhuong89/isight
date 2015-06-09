@@ -1,0 +1,52 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">How about we start with calculate Fibonacci with recursive method:</div>
+  <div class="panel-body">
+      <input class="form-control" placeholder="Fibonacci" id="fibonacci_input">
+      Result: <div id="fibonacciResult"></div>
+  </div>
+</div>
+    
+<div class="panel panel-primary">
+  <div class="panel-heading">Try to use Rails default sort functions (average complexity: n log n):</div>
+  <div class="panel-body">
+      <span class="label label-info">Enter number to pop into array, type c to clear</span>
+      <input class="form-control" placeholder="bop bop baby please don't let me go" id="sort_input">
+      Result: <div id="sort_result"></div>
+  </div>
+</div>
+
+<script>
+    $('#fibonacci_input').keyup(function(){
+        var n=$('#fibonacci_input').val();
+        
+        $.ajax({
+            type:'GET',
+            url:'/pages/fibonacci',
+            data: { 'number' : n },
+            success:function(data){
+              $('#fibonacciResult').html(data);
+            }
+        });
+    });
+    
+    $('#sort_input').keypress(function(e) {
+        if(e.which == 13) {
+            var n=$('#sort_input').val()
+            
+            $.ajax({
+            type:'GET',
+            url:'/pages/sort_array',
+            data: { 'input_character' : n },
+            success:function(data){
+              $('#sort_result').html('');
+              $.each(data, function(index, item) {
+                  $('#sort_result').append('<span class="label label-success">' + item + '</span> ')
+              });
+              //$('#sort_result').html(data);
+              
+              $('#sort_input').val('')
+            }
+        });
+        }
+    });
+</script>

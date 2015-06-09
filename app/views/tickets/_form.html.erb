@@ -1,6 +1,8 @@
 <div class="authform">
   <%# form_tag :action => 'new'  do %>
   <%= form_for @ticket do |f| %>
+    <%= render "shared/error_messages", :target => @ticket %>
+  
     <%= f.text_field :title, class: 'form-control', :placeholder => "Ticket's Title" %>
     <%= f.text_area :descr, class: 'form-control', :placeholder => "Ticket's Description" %>
     <label>Category (Multiple)</label>

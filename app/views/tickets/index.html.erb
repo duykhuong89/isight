@@ -1,6 +1,14 @@
+<div class="row">
+  <div class="col-md-6"><%= high_chart("Piechart", @chart) do |c| %>
+          <%= raw "options.tooltip.formatter = function() {return '<b> YUPI!! '+ this.point.name +'</b>: '+ this.y +' %';}"  %>
+          <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
+      <% end %></div>
+  <div class="col-md-6"><%= high_chart("Linechart", @trendchart) %></div>
+</div>
+
 <div class="container">
   <h2>Ticket List</h2>
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Title</th>
@@ -11,9 +19,9 @@
     <tbody>
       <% @tickets.each do |ticket| %>
       <tr data-row-id=<%= ticket.id %>>
-        <td><%= ticket.title %></td>
-        <td><%= ticket.descr %></td>
-        <td>
+        <td class="col-md-3"><%= ticket.title %></td>
+        <td class="col-md-6"><%= ticket.descr %></td>
+        <td class="col-md-3">
           <% ticket.categories.each do |category| %>
           <%= category.descr %> <%= ", " unless category == ticket.categories.last %>
           <% end %>

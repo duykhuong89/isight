@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605035828) do
+ActiveRecord::Schema.define(version: 20150609040107) do
 
   create_table "categories", force: true do |t|
     t.string   "descr"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150605035828) do
   end
 
   create_table "tickets", force: true do |t|
-    t.string   "descr"
+    t.text     "descr"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"

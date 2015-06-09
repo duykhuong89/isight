@@ -1,2 +1,33 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<p><%= link_to 'Users:', users_path %> <%= User.count %> registered (Click for user list using datatables)</p>
+<p class="text-success">Test account: testuser@c9.io / 123456789<p>
+
+<div class="owl-carousel">
+  <div class="owl-item">
+    <div class="textBoxWithNoColor" style="background: #7fc242; font-family: 'RobotoSlabRegular';">
+      <img src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xta1/v/t1.0-9/11249634_10153885470553265_2958065451126578188_n.jpg?oh=892eb284de22d2540f6c9b1dd2b7c0e8&oe=56007478&__gda__=1446046517_923c371c33410531b757a9a74a288687" class="img-circle sizeIconMedium">
+      <div style="font-family: 'garnata-display-regular'; font-size: 30pt;">PHAM DUY KHUONG</div>
+      <h4>DOB:</h4> 18-Jul-1989
+      <h4>Mobile:</h4> (+84)1224608987 / (+66)858425816
+      <h4>Email:</h4> duykhuongpham@gmail.com
+    </div>
+  </div>
+  <div class="owl-item">
+    <div class="textBoxWithNoColor" style="background: #42bdc2; font-family: 'RobotoSlabRegular';">
+                  <h2>Professional background</h3>
+                  <h4>Bachelor of Software Engineering (FPT University 2008-2011)</h4>
+                  <h4>FPT Software Internship (2011)</h4>
+                  <h4>FPT Software – Vinamilk Project – Hochiminh city – Developer/Technical Leader (2011-2012)</h4>
+                  <h4>FPT Software – Unilever Thailand Project – Bangkok – Technical Support/Coordinator/Migration Data Extractor (2013-2015)</h4>
+              </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+        navigation : true,
+        singleItem : true,
+        transitionStyle : "fade"
+    });
+  });
+</script>

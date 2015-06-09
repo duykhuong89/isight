@@ -11,7 +11,37 @@
  * file per style scope.
  *
  *= require jquery-ui
+ *= require owl.carousel
+ *= require owl.theme
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_tree .
  *= require_self
  */
+
+@font-face {
+    font-family: 'garnata-display-regular';
+    src: url('/assets/Garnata-Display-Regular.eot');
+    src: url('/assets/Garnata-Display-Regular.eot?iefix') format('eot'),
+         url('/assets/Garnata-Display-Regular.woff') format('woff'),
+         url('/assets/Garnata-Display-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoSlabRegular';
+    src: url('/assets/RobotoSlab-Regular.ttf') format('truetype');
+}
+
+.textBoxWithNoColor{
+	padding: 30px 0px;
+	margin: 10px;
+	color: #FFF;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.sizeIconMedium{
+    width: 200px;
+    height: 200px;
+}
