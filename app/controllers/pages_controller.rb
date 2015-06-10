@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def algorithm
+    session[:sort_array] = []
   end
   
   def fibonacci
