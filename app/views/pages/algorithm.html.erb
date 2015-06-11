@@ -16,39 +16,7 @@
 </div>
 
 <script>
-    $('#fibonacci_input').keyup(function(){
-        var n=$('#fibonacci_input').val();
-        
-        var spinner=new Spinner().spin($('div')[0]);
-        $.ajax({
-            type:'GET',
-            url:'/pages/fibonacci',
-            data: { 'number' : n },
-            success:function(data){
-              $('#fibonacciResult').html(data);
-            }
-        });
-        spinner.stop();
-    });
-    
-    $('#sort_input').keypress(function(e) {
-        if(e.which == 13) {
-            var n=$('#sort_input').val()
-            
-            $.ajax({
-            type:'GET',
-            url:'/pages/sort_array',
-            data: { 'input_character' : n },
-            success:function(data){
-              $('#sort_result').html('');
-              $.each(data, function(index, item) {
-                  $('#sort_result').append('<span class="label label-success">' + item + '</span> ')
-              });
-              //$('#sort_result').html(data);
-              
-              $('#sort_input').val('')
-            }
-        });
-        }
-    });
+  $(document).ready(function() {
+	  Algorithms.init()
+  });
 </script>
